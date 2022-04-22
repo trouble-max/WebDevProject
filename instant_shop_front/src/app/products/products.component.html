@@ -1,0 +1,22 @@
+<h1>Products</h1>
+
+
+<h3>Categories</h3>
+<button (onclick)="getProducts()">All</button>
+<div *ngFor="let category of categories">
+    <button (onclick)="getProductsByCategory(category.id)">{{ category.name }}</button>
+</div>
+
+<h3>Search</h3>
+<p>Name: <input type="text" placeholder=" Enter Product Name" [(ngModel)]="nameFilter"></p>
+
+<div *ngFor="let product of products">
+    <div *ngIf="product.name.startsWith(nameFilter)">
+        <a [routerLink]="[router.url, product.id]">
+            id: {{product.id}}, name: {{product.name}}, 
+            description: {{product.description}}, price: {{product.price | currency}}
+        </a>
+    </div>
+</div>
+
+<button (click)="goBack()">Go Back</button>

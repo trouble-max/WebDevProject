@@ -1,0 +1,10 @@
+<h1>Shops</h1>
+
+<ul>
+    <li *ngFor="let shop of shops">
+        <a [routerLink]="['/shops', shop.id, 'products']">
+            id: {{ shop.id }}, name: {{ shop.name }},
+            description: {{ shop.description }}
+        </a>
+    </li>
+</ul>

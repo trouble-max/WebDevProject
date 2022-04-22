@@ -1,0 +1,9 @@
+<h1>Product Detail</h1>
+
+<p>
+    id: {{ product.id }}, name: {{ product.name }},
+    description: {{ product.description }}, price: {{ product.price | currency }}
+</p>
+
+<button (click)="addToCart(product)">Add To Cart</button>
+<button (click)="goBack()">Go Back</button>

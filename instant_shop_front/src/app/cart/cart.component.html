@@ -1,0 +1,24 @@
+<h3>Cart</h3>
+
+<div *ngFor="let product of products">
+    Name: {{ product.name }}
+    Description: {{ product.description }}
+    Price: {{ product.price | currency }}
+</div>
+
+<p>Name: <input type="text" [(ngModel)]="name"></p>
+<p>Address: <input type="text" [(ngModel)]="address"></p>
+
+<button (click)="onSubmit()">Purchase</button>
+<button (click)="goBack()">Go Back</button>
+
+
+<!-- <div>
+    Name
+  <input type="text">
+</div>
+
+<div>
+    Address
+  <input type="text">
+</div> -->

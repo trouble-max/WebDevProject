@@ -1,0 +1,9 @@
+<a [routerLink]="['/']">
+    <h1>Instant Shop</h1>
+</a>
+
+<a routerLink="/cart" class="button fancy-button">Checkout</a>
+
+<div *ngIf="logged">
+    <button (click)="logout()">Logout</button>
+</div>
