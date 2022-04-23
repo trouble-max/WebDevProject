@@ -1,0 +1,1 @@
+from .views import check, products_detail, products
