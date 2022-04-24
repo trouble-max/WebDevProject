@@ -2,7 +2,6 @@ from django.db import models
 
 class City(models.Model):
     name = models.CharField(max_length=250)
-
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
@@ -31,7 +30,7 @@ class Shop(models.Model):
         return {
             'name': self.name,
             'description': self.description,
-            'price': self.categories
+            'city': self.city
         }
 
     def __str__(self):
@@ -40,6 +39,7 @@ class Shop(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
+    shop_id = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='category')
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'

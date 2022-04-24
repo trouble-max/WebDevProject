@@ -40,7 +40,7 @@ class CategorySerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'shop_id')
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -52,17 +52,13 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ShopSerializers(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True, read_only=True)
-
     class Meta:
-        model = Category
-        fields = ('id', 'name', 'description', 'categories')
+        model = Shop
+        fields = ('id', 'name', 'description', 'city')
 
 
 class CitySerializers(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True, read_only=True)
-
     class Meta:
         model = Category
-        fields = ('id', 'name', 'shops')
+        fields = ('id', 'name')
 

@@ -1,9 +1,13 @@
 from django.urls import path
 from rest_framework_jwt.views import obtain_jwt_token
-from api.views import check,products_detail, products
+from api.views import check,products_detail, products,shop_list, prod_by_category, prod_by_shop, cities, shop_by_city
 urlpatterns=[
     path('login/', obtain_jwt_token),
-    path('products/<int:shop_id>/<int:categ_id>/', products.as_view()),
-    path('products/<int:prod_id>/', products_detail.as_view()),
-
+    path('shops/', shop_list), # Список всех магазинов, внезависимости от города
+    path('shops/<int:shop_id>/categories/', prod_by_category), # Все категории определенного магазина
+    path('shops/<int:shop_id>/categories/<int:categ_id>/products/', products.as_view()), # Все продукты определенного магазина и категории
+    path('shops/<int:shop_id>/products/', prod_by_shop), # Все продукты магазина, внезависимости от категории
+    path('shops/<int:shop_id>/products/<int:prod_id>/', products_detail.as_view()), # Детали продукта, определенного магазина
+    path('cities/', cities), # Абсолютно все города
+    path('cities/<int:city_id>/',shop_by_city) # Магазины по городу
 ]

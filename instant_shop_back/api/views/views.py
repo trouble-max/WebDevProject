@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
 from api.models import Product, Category, Shop, City
-from api.serializers import ProductSerializer
+from api.serializers import ProductSerializer, ShopSerializers, CitySerializers, CategorySerializer
 
 
 class products(APIView):
@@ -24,16 +24,56 @@ class products(APIView):
 
 
 class products_detail(APIView):
-    def get_object(self, prod_id):
+    def get_object(self, prod_id, shop_id):
         try:
-            return Product.objects.filter(id=prod_id)
+            return Product.objects.filter(id=prod_id).filter(shop_id=shop_id)
         except Product.DoesNotExist as e:
             raise Http404
 
-    def get(self, request, prod_id=None):
-        product = self.get_object(prod_id)
+    def get(self, request, prod_id=None, shop_id=None):
+        product = self.get_object(prod_id, shop_id)
         serializer = ProductSerializer(product, many=True)
         permission_classes = (IsAuthenticated,)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def shop_list(request):
+    if request.method == 'GET':
+        shop = Shop.objects.all()
+        serializer = ShopSerializers(shop, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def prod_by_category(request, shop_id):
+    if request.method == 'GET':
+        category = Category.objects.filter(shop_id=shop_id)
+        serializer = CategorySerializer(category, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def prod_by_shop(request, shop_id):
+    if request.method == 'GET':
+        products = Product.objects.filter(shop_id=shop_id)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def cities(request):
+    if request.method == 'GET':
+        city = City.objects.all()
+        serializer = CitySerializers(city, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['GET'])
+def shop_by_city(request, city_id):
+    if request.method == 'GET':
+        shop = Shop.objects.filter(city_id=city_id)
+        serializer = ShopSerializers(shop, many=True)
         return Response(serializer.data)
 
 
