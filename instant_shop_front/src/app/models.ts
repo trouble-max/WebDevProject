@@ -3,6 +3,10 @@ export interface Product{
     name: string;
     description: string;
     price: number;
+    filename: string;
+    height: number;
+    width: number;
+    rating: number;
 }
 
 export interface Category{

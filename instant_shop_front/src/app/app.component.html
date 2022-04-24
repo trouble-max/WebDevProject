@@ -1,5 +1,10 @@
 <app-top-bar></app-top-bar>
 
+<div *ngIf="logged">
+  <button (click)="logout()">Logout</button>
+</div>
+
+
 <div *ngIf="router.url === '/not-found'">
   <app-not-found></app-not-found>
 </div>

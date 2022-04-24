@@ -21,7 +21,6 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProduct();
-    this.getProductTest();
   }
 
   getProduct() {
@@ -29,13 +28,9 @@ export class ProductDetailComponent implements OnInit {
       const s_id = parseInt(params.get('s_id') || '{}');
       const p_id = parseInt(params.get('p_id') || '{}');
       this.productService.getProduct(s_id, p_id).subscribe((data) => {
-        this.product = data;
+        this.product = data[0];
       })
     })
-  }
-
-  getProductTest() {
-    this.product = {id: 1, name: 'test', description: 'test_description', price: 100.0};
   }
 
   addToCart(product: Product) {

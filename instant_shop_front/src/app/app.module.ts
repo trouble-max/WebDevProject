@@ -12,6 +12,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthIntercaptor } from './AuthIntercepter';
+import { CityComponent } from './city/city.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthIntercaptor } from './AuthIntercepter';
     ShopsComponent,
     ProductDetailComponent,
     CartComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CityComponent
   ],
   imports: [
     BrowserModule,

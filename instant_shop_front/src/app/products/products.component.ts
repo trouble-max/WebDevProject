@@ -22,9 +22,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
-    this.getProductsTest();
     this.getCategories();
-    this.getCategoriesTest();
   }
 
   getProducts() {
@@ -45,11 +43,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  getProductsTest() {
-    this.products = [{id: 1, name: 'test', description: 'test_description', price: 100.0},
-                     {id: 2, name: '2test2', description: 'test2_description', price: 200.0}];
-  }
-
   getCategories() {
     this.route.paramMap.subscribe((params) => {
       const s_id = parseInt(params.get('id') || '{}');
@@ -59,10 +52,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  getCategoriesTest() {
-    this.categories = [{id: 1, name: 'test'}, {id: 2, name: 'test2'}, {id: 3, name: 'test3'}, {id: 4, name: 'test4'},];
-  }
-  
   goBack() {
     this.location.back();
   }

@@ -13,19 +13,19 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(id: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${id}/products`);
+    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${id}/products/`);
   }
   
-  getProduct(s_id: number, p_id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.BASE_URL}/api/shops/${s_id}/products/${p_id}`);
+  getProduct(s_id: number, p_id: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${s_id}/products/${p_id}/`);
   }
 
   getCategories(s_id: number): Observable<Category[]> {
-    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${s_id}/categories`);
+    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${s_id}/categories/`);
   }
 
   getProductsByCategory(s_id: number, c_id: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${s_id}/categories/${c_id}/products`);
+    return this.http.get<Product[]>(`${this.BASE_URL}/api/shops/${s_id}/categories/${c_id}/products/`);
   }
 
 }

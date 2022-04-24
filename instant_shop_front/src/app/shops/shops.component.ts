@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Shop } from '../models';
 import { ShopService } from '../shop.service';
 
@@ -11,11 +13,18 @@ export class ShopsComponent implements OnInit {
 
   shops: Shop[] = [];
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private location: Location) { }
 
   ngOnInit(): void {
-    this.getShops();
-    this.getShopsTest();
+    if (this.router.url === '/shops') {
+      this.getShops();
+    }
+    else {
+      this.getShopsByCity();
+    }
   }
 
   getShops() {
@@ -24,8 +33,17 @@ export class ShopsComponent implements OnInit {
     })
   }
 
-  getShopsTest() {
-    this.shops = [{id: 1, name: 'test', description: 'test_description'}];
+  getShopsByCity() {
+    this.route.paramMap.subscribe((params) => {
+      const c_id = parseInt(params.get('id') || '{}');
+      this.shopService.getShopsByCity(c_id).subscribe((data) => {
+        this.shops = data;
+      })
+    })
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

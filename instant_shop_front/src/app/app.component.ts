@@ -18,30 +18,26 @@ export class AppComponent implements OnInit{
               public router: Router) {}
   
   ngOnInit(): void {
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   this.logged = true;
-    // }
-    const log = localStorage.getItem('log');
-    if(log) {
+    const token = localStorage.getItem('token');
+    if (token) {
       this.logged = true;
     }
 
   }
 
   login() {
-    // this.shopService.login(this.username,this.password).subscribe((data) => {
+    this.shopService.login(this.username,this.password).subscribe((data) => {
 
-    //   localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.token);
 
-    //   this.logged = true;
-    //   this.username = '';
-    //   this.password = '';
-    // });
+      this.logged = true;
+      this.username = '';
+      this.password = '';
+    });
+  }
 
-    localStorage.setItem('log', 'true');
-    this.logged = true;
-    
-    window.location.reload();
+  logout() {
+    this.logged = false
+    localStorage.removeItem('token');
   }
 }
