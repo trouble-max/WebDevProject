@@ -4,6 +4,8 @@
     Name: {{ product.name }}
     Description: {{ product.description }}
     Price: {{ product.price | currency }}
+
+    <button (click)="removeProduct(product)">Remove from cart</button>
 </div>
 
 <p>Name: <input type="text" [(ngModel)]="name"></p>

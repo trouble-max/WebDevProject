@@ -12,10 +12,12 @@
 
 <div *ngFor="let product of products">
     <div *ngIf="product.name.includes(nameFilter)">
+        <img src="/assets/images/{{product.filename}}" alt="{{product.filename}}">
         <a [routerLink]="[router.url, product.id]">
             id: {{product.id}}, name: {{product.name}}, 
             description: {{product.description}}, price: {{product.price | currency}}
         </a>
+        <button (click)="addToCart(product)">Add To Cart</button>
     </div>
 </div>
 

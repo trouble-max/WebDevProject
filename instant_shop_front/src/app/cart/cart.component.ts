@@ -42,6 +42,11 @@ export class CartComponent implements OnInit {
     this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
   }
 
+  removeProduct(product: Product) {
+    this.products = this.cartService.removeProduct(product);
+    this.getProducts();
+  }
+
   goBack() {
     this.location.back();
   }

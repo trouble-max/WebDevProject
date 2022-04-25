@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../cart.service';
 import { Category, Product } from '../models';
 import { ProductService } from '../product.service';
 
@@ -16,6 +17,7 @@ export class ProductsComponent implements OnInit {
   nameFilter: string = '';
 
   constructor(private productService: ProductService,
+              private cartService: CartService,
               private route: ActivatedRoute,
               private location: Location,
               public router: Router) { }
@@ -50,6 +52,10 @@ export class ProductsComponent implements OnInit {
         this.categories = data;
       });
     });
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 
   goBack() {
