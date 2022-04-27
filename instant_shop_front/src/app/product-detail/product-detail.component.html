@@ -10,6 +10,11 @@
       Description: {{ product.description }}
   </p>
   <button (click)="addToCart(product)" class="add_to_cart">Add To Cart</button>
+  <a [href] = "'https://telegram.me/share/url?url=' + 'http://localhost:4200/shops/' + shop_id + '/products/' + product_id">
+    <button type="button" (click)="share()" class="add_to_cart" id="share_butt">
+      Share
+    </button>
+  </a>
 </div>
 
 

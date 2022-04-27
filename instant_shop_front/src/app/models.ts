@@ -7,6 +7,7 @@ export interface Product{
     height: number;
     width: number;
     rating: number;
+    count:number;
 }
 
 export interface Category{

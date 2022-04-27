@@ -11,7 +11,8 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
+  shop_id: number | undefined;
+  product_id: number | undefined;
   product!: Product;
 
   constructor(private productService: ProductService,
@@ -21,6 +22,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProduct();
+    this.getShopID()
   }
 
   getProduct() {
@@ -35,6 +37,17 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
+  }
+  share() {
+    window.alert('The product has been shared!');
+  }
+  getShopID(){
+    this.route.paramMap.subscribe((params) => {
+      const s_id = parseInt(params.get('s_id') || '{}');
+      const p_id = parseInt(params.get('p_id') || '{}');
+      this.shop_id = s_id;
+      this.product_id = p_id;
+    })
   }
 
   goBack() {

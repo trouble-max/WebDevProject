@@ -58,7 +58,7 @@
   display: inline-flex;
   margin-bottom:120px;
   position: relative;
-  top: 0;
+  top: 1%;
   bottom: 0;
   box-sizing: border-box;
   min-height: 102%;
@@ -95,4 +95,34 @@
 
 .description{
   height: 100px;
+}
+#plusMain{
+  position: absolute;
+  margin-top:20px;
+  height: 15px;
+  color: #ffffff;
+  bottom:10%;
+  right: 50%;
+  background-color: #25b000;
+  border: none;
+  font-size: 15px;
+  border-radius: 25px;
+}
+#minusMain{
+  position: absolute;
+  height: 15px;
+  color: #ffffff;
+  bottom:0%;
+  right: 50%;
+  background-color: #25b000;
+  border: none;
+  font-size: 12px;
+  border-radius: 20px;
+}
+#countMain{
+  position: absolute;
+  bottom: 1%;
+  left: 55%;
+  text-decoration: none;
+  color: #494949;
 }

@@ -32,6 +32,9 @@ export class ProductsComponent implements OnInit {
       const id = parseInt(params.get('id') || '{}');
       this.productService.getProducts(id).subscribe((data) => {
         this.products = data;
+        for(var val of this.products){
+          val.count = 0
+        }
       });
     });
   }
@@ -41,6 +44,7 @@ export class ProductsComponent implements OnInit {
       const s_id = parseInt(params.get('id') || '{}');
       this.productService.getProductsByCategory(s_id, c_id).subscribe((data) => {
         this.products = data;
+
       });
     });
   }
@@ -53,11 +57,17 @@ export class ProductsComponent implements OnInit {
       });
     });
   }
-
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
-
+  plusCounter(product:Product){
+    product.count += 1;
+    this.cartService.updateProduct(product);
+  }
+  minusCounter(product:Product){
+    product.count -= 1;
+    this.cartService.updateProduct(product);
+  }
   goBack() {
     this.location.back();
   }

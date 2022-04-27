@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   products: Product[] = [];
   name: string = '';
   address: string = '';
+  timecomf: string ='';
 
   constructor(private cartService: CartService,
               private location: Location) { }
@@ -24,7 +25,7 @@ export class CartComponent implements OnInit {
   onSubmit(): void {
     let price = 0;
     this.products.forEach(product => {
-      price += product.price;
+      price += product.price * product.count;
     })
 
      let curr_price = price.toLocaleString('en-US', {
@@ -35,10 +36,12 @@ export class CartComponent implements OnInit {
     window.alert(this.name + ' ' + this.address + ' ' + curr_price);
     this.name = '';
     this.address = '';
+    this.timecomf ='';
     this.products = this.cartService.clearCart();
   }
 
   getProducts() {
+    console.log(JSON.parse(localStorage.getItem('cart_products') || '[]'));
     this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
   }
 
@@ -46,7 +49,16 @@ export class CartComponent implements OnInit {
     this.products = this.cartService.removeProduct(product);
     this.getProducts();
   }
-
+  addProduct(product:Product){
+    product.count += 1;
+  }
+  minusProduct(product:Product){
+    if(product.count==1){
+      this.removeProduct(product)
+    }else{
+      product.count -= 1;
+    }
+  }
   goBack() {
     this.location.back();
   }
