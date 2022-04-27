@@ -44,7 +44,9 @@ export class ProductsComponent implements OnInit {
       const s_id = parseInt(params.get('id') || '{}');
       this.productService.getProductsByCategory(s_id, c_id).subscribe((data) => {
         this.products = data;
-
+        for(var val of this.products){
+          val.count = 0
+        }
       });
     });
   }

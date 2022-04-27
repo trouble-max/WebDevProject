@@ -107,6 +107,7 @@
   border: none;
   font-size: 15px;
   border-radius: 25px;
+  line-height: 5px;
 }
 #minusMain{
   position: absolute;
@@ -118,6 +119,8 @@
   border: none;
   font-size: 12px;
   border-radius: 20px;
+  line-height: 5px;
+  margin-bottom: 3px;
 }
 #countMain{
   position: absolute;
