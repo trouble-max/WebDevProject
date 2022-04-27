@@ -1,24 +1,29 @@
 <h1>Products</h1>
 
 
-<h3>Categories</h3>
-<button (click)="getProducts()">All</button>
-<div *ngFor="let category of categories">
-    <button (click)="getProductsByCategory(category.id)">{{ category.name }}</button>
+<h4>Categories</h4>
+<div class="categories">
+  <button (click)="getProducts()" class="buttons">All</button>
+  <div *ngFor="let category of categories" class="buttons">
+      <button (click)="getProductsByCategory(category.id)" class="buttonss">{{ category.name }}</button>
+  </div>
 </div>
 
-<h3>Search</h3>
-<p>Name: <input type="text" placeholder=" Enter Product Name" [(ngModel)]="nameFilter"></p>
+<h6>Search
+  <input type="text" placeholder=" Enter Product Name" [(ngModel)]="nameFilter">
+</h6>
 
-<div *ngFor="let product of products">
-    <div *ngIf="product.name.includes(nameFilter)">
-        <img src="/assets/images/{{product.filename}}" alt="{{product.filename}}">
-        <a [routerLink]="[router.url, product.id]">
-            id: {{product.id}}, name: {{product.name}}, 
-            description: {{product.description}}, price: {{product.price | currency}}
-        </a>
-        <button (click)="addToCart(product)">Add To Cart</button>
-    </div>
+<div class="productlist">
+  <div *ngFor="let product of products" class="products">
+      <div *ngIf="product.name.includes(nameFilter)" >
+          <img src="/assets/images/{{product.filename}}" alt="{{product.filename}}" width="100" height="120">
+          <a [routerLink]="[router.url, product.id]" class="description">
+              {{product.price | currency}} <br>
+              {{product.name}}
+          </a>
+          <button (click)="addToCart(product)" class="add_to_cart">Add To Cart</button>
+      </div>
+  </div>
 </div>
 
-<button (click)="goBack()">Go Back</button>
+<button (click)="goBack()" class="go_back">Go Back</button>

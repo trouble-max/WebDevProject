@@ -1,11 +1,16 @@
 <h1>Product Detail</h1>
+<br>
+<h3>{{ product.name }}<br></h3>
 
-<img src="/assets/images/{{product.filename}}" alt="{{product.filename}}">
+<div class="product">
+  <img src="/assets/images/{{product.filename}}" alt="{{product.filename}}">
 
-<p>
-    id: {{ product.id }}, name: {{ product.name }},
-    description: {{ product.description }}, price: {{ product.price | currency }}
-</p>
+  <p>
+    {{ product.price | currency }} <br>
+      Description: {{ product.description }}
+  </p>
+  <button (click)="addToCart(product)" class="add_to_cart">Add To Cart</button>
+</div>
 
-<button (click)="addToCart(product)">Add To Cart</button>
-<button (click)="goBack()">Go Back</button>
+
+<button (click)="goBack()" class="go_back">Go Back</button>

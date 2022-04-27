@@ -1,18 +1,25 @@
-<h3>Cart</h3>
+<h1>Cart</h1>
+<br>
+<div class="cart">
+  <div class="cart_list">
+    <div *ngFor="let product of products" class="products">
+        Name: {{ product.name }}<br>
+        Description: {{ product.description }}<br>
+        Price: {{ product.price | currency }}
 
-<div *ngFor="let product of products">
-    Name: {{ product.name }}
-    Description: {{ product.description }}
-    Price: {{ product.price | currency }}
+        <button (click)="removeProduct(product)" class="remove">Remove from cart</button>
+    </div>
+  </div>
 
-    <button (click)="removeProduct(product)">Remove from cart</button>
+  <div class="purchase">
+
+    <p>Name: <input type="text" [(ngModel)]="name"></p>
+    <p>Address: <input type="text" [(ngModel)]="address"></p>
+
+    <button (click)="onSubmit()">Purchase</button>
+  </div>
 </div>
-
-<p>Name: <input type="text" [(ngModel)]="name"></p>
-<p>Address: <input type="text" [(ngModel)]="address"></p>
-
-<button (click)="onSubmit()">Purchase</button>
-<button (click)="goBack()">Go Back</button>
+<button (click)="goBack()" class="go_back">Go Back</button>
 
 
 <!-- <div>
