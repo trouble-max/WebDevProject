@@ -10,7 +10,7 @@ export class CartService {
 
   addToCart(product: Product) {
     let bool_c:boolean = false;
-
+    this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
     for(var val of this.products){
       if(val.id == product.id){
         if(product.count==null) product.count=1;
@@ -25,6 +25,7 @@ export class CartService {
       this.products.push(product);
     }
     localStorage.setItem('cart_products', JSON.stringify(this.products));
+    this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
   }
 
   getProducts() {
@@ -53,11 +54,12 @@ export class CartService {
     return this.products;
   }
   updateProduct(product: Product){
-    console.log("I'm HERE")
     for(var prod of this.products){
-      console.log("Cycle")
       if(prod.id==product.id){
-        prod=product
+        console.log("ya")
+        prod.count += 1
+        localStorage.setItem('cart_products', JSON.stringify(this.products));
+        this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
         break;
       }
     }

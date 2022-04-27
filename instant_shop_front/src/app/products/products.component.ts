@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.getCategories();
+    this.updateProds();
   }
 
   getProducts() {
@@ -34,6 +35,12 @@ export class ProductsComponent implements OnInit {
         this.products = data;
         for(var val of this.products){
           val.count = 0
+        }
+        let cart_prods = JSON.parse(localStorage.getItem('cart_products') || '[]');
+        for(var prod of cart_prods){
+          console.log(this.products[prod.id-1])
+          console.log(prod)
+          this.products[prod.id-1].count = prod.count
         }
       });
     });
@@ -47,6 +54,7 @@ export class ProductsComponent implements OnInit {
         for(var val of this.products){
           val.count = 0
         }
+
       });
     });
   }
@@ -63,15 +71,18 @@ export class ProductsComponent implements OnInit {
     this.cartService.addToCart(product);
   }
   plusCounter(product:Product){
-    product.count += 1;
+    product.count += 1
     this.cartService.updateProduct(product);
   }
   minusCounter(product:Product){
-    product.count -= 1;
+    product.count -= 1
     this.cartService.updateProduct(product);
   }
   goBack() {
     this.location.back();
+  }
+  updateProds(){
+
   }
 
 }

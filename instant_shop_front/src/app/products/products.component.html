@@ -20,7 +20,6 @@
           <a [routerLink]="[router.url, product.id]" class="description">
               {{product.price | currency}} <br>
               {{product.name}}<br>
-
           </a>
         <div *ngIf="product.count!=0" id="add_to_cart">
 

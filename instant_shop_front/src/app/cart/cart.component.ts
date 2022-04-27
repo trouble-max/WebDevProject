@@ -41,7 +41,6 @@ export class CartComponent implements OnInit {
   }
 
   getProducts() {
-    console.log(JSON.parse(localStorage.getItem('cart_products') || '[]'));
     this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
   }
 
@@ -49,16 +48,28 @@ export class CartComponent implements OnInit {
     this.products = this.cartService.removeProduct(product);
     this.getProducts();
   }
+
+
   addProduct(product:Product){
     product.count += 1;
+    localStorage.setItem('cart_products', JSON.stringify(this.products));
+    this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
+    console.log(this.products)
   }
+
+
   minusProduct(product:Product){
     if(product.count==1){
       this.removeProduct(product)
     }else{
       product.count -= 1;
     }
+    localStorage.setItem('cart_products', JSON.stringify(this.products));
+    this.products = JSON.parse(localStorage.getItem('cart_products') || '[]');
+    console.log(this.products)
   }
+
+
   goBack() {
     this.location.back();
   }
