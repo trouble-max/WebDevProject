@@ -99,6 +99,43 @@ def order_list(request):
         return Response(serializer.data)
 
 
+class productsListCRUD(APIView):
+
+    def get_object(self, prod_id):
+        try:
+            return Product.objects.filter(id=prod_id).first()
+        except Product.DoesNotExist as e:
+            raise Http404
+
+    def get(self, request, prod_id = None):
+        product = self.get_object(prod_id)
+        serializer = ProductSerializer(product, many=True)
+        permission_classes = (IsAuthenticated,)
+        return Response(serializer.data)
+
+    def post(self, request, prod_id = None):
+        serializer = ProductSerializer(data=request.data)
+        permission_classes = (IsAuthenticated,)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, prod_id = None):
+        permission_classes = (IsAuthenticated,)
+        prod = self.get_object(prod_id)
+        serializer = ProductSerializer(instance=prod, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+    def delete(self, request, prod_id = None):
+        permission_classes = (IsAuthenticated,)
+        prod = self.get_object(prod_id)
+        prod.delete()
+        return Response({'message': 'deleted'}, status=204)
+
 
 def check(request):
     print(Shop.objects.all())
