@@ -1,5 +1,5 @@
 from django.db import models
-
+import json, jsonfield
 class City(models.Model):
     name = models.CharField(max_length=250)
     class Meta:
@@ -86,3 +86,28 @@ class Product(models.Model):
         return f'{self.id}: {self.name} | {self.description} | {self.price}'
 
 
+class Order(models.Model):
+    name = models.CharField(max_length=250)
+    address = models.TextField(max_length=1000)
+    prod = models.TextField(max_length=1000)
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+        # ordering = ('name',)
+
+    def to_json(self):
+        return {
+            'name': self.name,
+            'description': self.description,
+            'price': self.price,
+            'filename': self.filename,
+            'height':self.height,
+            'width':self.width,
+            'rating':self.rating,
+            'category':self.category,
+            'shop_id':self.shop_id
+        }
+
+    def __str__(self):
+        return f'{self.id}: {self.name}'

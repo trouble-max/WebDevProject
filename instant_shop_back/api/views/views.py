@@ -5,8 +5,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 
-from api.models import Product, Category, Shop, City
-from api.serializers import ProductSerializer, ShopSerializers, CitySerializers, CategorySerializer
+from api.models import Product, Category, Shop, City,Order
+from api.serializers import ProductSerializer, ShopSerializers, CitySerializers, CategorySerializer, OrderSerializers
 
 
 class products(APIView):
@@ -17,6 +17,7 @@ class products(APIView):
             raise Http404
 
     def get(self, request, shop_id=None, categ_id=None):
+        print(Order.objects.all())
         product = self.get_object(shop_id, categ_id)
         serializer = ProductSerializer(product, many=True)
         permission_classes = (IsAuthenticated,)
@@ -75,6 +76,28 @@ def shop_by_city(request, city_id):
         shop = Shop.objects.filter(city_id=city_id)
         serializer = ShopSerializers(shop, many=True)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create_order(request):
+    if request.method == 'POST':
+        permission_classes = (IsAuthenticated,)
+        serializer = OrderSerializers(data=request.data)
+        print(request.data['prod'])
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+
+@api_view(['GET'])
+def order_list(request):
+    if request.method == 'GET':
+        order = Order.objects.all()
+
+        serializer = OrderSerializers(order, many=True)
+        return Response(serializer.data)
+
 
 
 def check(request):

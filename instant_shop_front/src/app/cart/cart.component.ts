@@ -34,6 +34,11 @@ export class CartComponent implements OnInit {
     });
 
     window.alert(this.name + ' ' + this.address + ' ' + curr_price);
+    this.cartService.createOrder(this.products, this.name, this.address);
+    this.cartService.createOrder(this.products, this.name, this.address).subscribe(data =>{
+      console.log(data)
+      this.getProducts()
+    })
     this.name = '';
     this.address = '';
     this.timecomf ='';

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import City,Shop,Category,Product
+from .models import City,Shop,Category,Product, Order
 
 
 class CitySerializer(serializers.Serializer):
@@ -62,3 +62,8 @@ class CitySerializers(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name')
 
+
+class OrderSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('id', 'name', 'address', 'prod')
